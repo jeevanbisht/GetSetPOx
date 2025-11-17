@@ -85,11 +85,28 @@ GetSetPOx is a Python-based MCP server designed for rapid POC deployment and sea
 
 ### Installation
 
-#### Option 1: Install from Source
+#### Option 1: Standalone Executable (Recommended for Quick Start)
+
+Download the pre-built standalone executable - no Python installation required!
+
+**Windows:**
+1. Download `getset-pox-mcp.exe` from releases
+2. Create a `.env` file with your credentials (see `.env.example`)
+3. Run: `getset-pox-mcp.exe`
+
+**Linux/macOS:**
+1. Download `getset-pox-mcp` from releases
+2. Make executable: `chmod +x getset-pox-mcp`
+3. Create a `.env` file with your credentials
+4. Run: `./getset-pox-mcp`
+
+See **[BUILD_INSTRUCTIONS.md](BUILD_INSTRUCTIONS.md)** for building your own executable.
+
+#### Option 2: Install from Source
 
 1. Clone the repository:
 ```bash
-git clone <repository-url>
+git clone https://github.com/jeevanbisht/GetSetPOx.git
 cd getset-pox-mcp
 ```
 
@@ -104,7 +121,7 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -e ".[dev]"
 ```
 
-#### Option 2: Using uv
+#### Option 3: Using uv
 
 ```bash
 uv venv
@@ -245,6 +262,11 @@ GetSetPOx/
 │   ├── test_diagnostics.py
 │   ├── test_echo.py
 │   └── test_hello_world.py
+├── BUILD_INSTRUCTIONS.md        # 📦 PyInstaller build guide
+├── ENV_PACKAGING_GUIDE.md       # 🔒 Configuration packaging guide
+├── getset-pox-mcp.spec          # PyInstaller specification
+├── prepare_env_for_build.bat    # Windows build helper
+├── prepare_env_for_build.sh     # Linux/macOS build helper
 ├── .gitignore                   # Git ignore rules
 ├── CHANGELOG.md                 # Version history
 ├── CODE_OF_CONDUCT.md           # Code of conduct
@@ -257,6 +279,32 @@ GetSetPOx/
 ├── SECURITY.md                  # Security policy
 └── setup.py                     # Setup script
 ```
+
+### Building Standalone Executables
+
+To package the server as a standalone executable:
+
+**Quick Build (with embedded .env):**
+```bash
+# Windows
+prepare_env_for_build.bat
+
+# Linux/macOS
+chmod +x prepare_env_for_build.sh
+./prepare_env_for_build.sh
+```
+
+**Manual Build:**
+```bash
+pip install pyinstaller
+pyinstaller getset-pox-mcp.spec
+```
+
+The executable will be created in the `dist/` directory (~24 MB).
+
+For detailed build instructions, configuration options, and security considerations, see:
+- **[BUILD_INSTRUCTIONS.md](BUILD_INSTRUCTIONS.md)** - Complete build guide
+- **[ENV_PACKAGING_GUIDE.md](ENV_PACKAGING_GUIDE.md)** - Configuration security guide
 
 ### Adding New Services
 
