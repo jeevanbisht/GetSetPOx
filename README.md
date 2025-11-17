@@ -1,10 +1,15 @@
-# getset-pox-mcp
+# GetSetPOx MCP Server
 
-A Model Context Protocol (MCP) server implementation providing example services and tools for demonstration and extension purposes.
+[![Python](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![MCP Protocol](https://img.shields.io/badge/MCP-Compatible-green.svg)](https://modelcontextprotocol.io/)
+
+A Model Context Protocol (MCP) server providing comprehensive POC capabilities for **Microsoft Entra ID**, **Global Secure Access**, **Identity Governance & Administration**, **Intune Device Management**, and **Microsoft Purview** through intelligent Microsoft Graph API integration.
 
 ## 🎯 Overview
 
-The getset-pox-mcp server is a Python-based MCP server that demonstrates best practices for building MCP servers, including:
+GetSetPOx is a Python-based MCP server designed for rapid POC deployment and seamless integration with AI agents, featuring:
 
 - ✨ Clean modular architecture with a services folder
 - 🔄 Support for multiple transport protocols (STDIO and HTTP)
@@ -14,15 +19,51 @@ The getset-pox-mcp server is a Python-based MCP server that demonstrates best pr
 
 ## ✨ Features
 
-### Available Tools
+### 🔧 Available Tools & Services
 
-1. **hello_world** - A simple greeting service that returns a personalized message
-2. **echo** - An echo service that returns the input message with metadata
-3. **check_token_permissions** - Comprehensive diagnostic tool for Microsoft Graph API permissions
-   - Tests 19 critical Microsoft Graph permissions
-   - Performs real API calls to verify access
-   - Provides detailed success/failure reports
-   - Offers actionable recommendations for missing permissions
+#### **Test & Diagnostics**
+- **hello_world** - Simple greeting service for testing MCP connectivity
+- **echo** - Echo service with metadata for validation and debugging
+- **check_token_permissions** - Comprehensive Microsoft Graph API permission diagnostics
+  - Tests 19 critical Graph API permissions with real API calls
+  - Provides detailed success/failure reports with actionable recommendations
+
+#### **Entra ID (EID) Management**
+- **EID_listUsers** - List all users from Microsoft Entra ID
+- **EID_getUser** - Get specific user by ID or userPrincipalName
+- **EID_searchUsers** - Search users by display name or email
+- **EID_listDevices** - List all devices (Entra Joined, Hybrid Joined, Registered, Compliant)
+- **EID_getDevice** - Get specific device details by ID
+- **EID_getGroups** - List all groups with pagination support
+- **EID_getGroup** - Get specific group details by ID
+- **EID_getGroupMembers** - Get members of a specific group
+- **EID_searchGroups** - Search groups by display name
+- **EID_createUserGroups** - Create and manage security groups with users and nested groups
+
+#### **Identity Governance & Administration (IGA)**
+- **IGA_listAccessPackages** - List all access packages from Entitlement Management
+- **IGA_createAccessCatalog** - Create new access package catalogs
+- **IGA_createAccessPackage** - Create new access packages
+- **IGA_addResourceGrouptoPackage** - Add Entra groups as resources to access packages
+
+#### **Intune Device Management**
+- **IN_listIntuneManagedDevices** - List all Intune-managed devices
+- **IN_getManagedDeviceDetails** - Get detailed device information (compliance, enrollment, sync status)
+- **IN_listDeviceCompliancePolicies** - List all device compliance policies
+- **IN_listDeviceConfigurationProfiles** - List all configuration profiles
+- **IN_syncManagedDevice** - Trigger device sync with Intune
+- **IN_prepGSAWinClient** - Prepare Global Secure Access Windows Client for deployment
+- **IN_intuneAppAssignment** - Assign Win32 apps to device groups with deployment settings
+
+#### **Global Secure Access - Internet Access (IA)**
+- **IA_checkInternetAccessForwardingProfile** - Check forwarding profile status
+- **IA_enableInternetAccessForwardingProfile** - Enable/disable forwarding profiles
+- **IA_createFilteringPolicy** - Create web category filtering policies
+- **IA_createFilteringProfile** - Create filtering profiles
+- **IA_linkPolicyToFilteringProfile** - Link policies to profiles with logging
+- **IA_createConditionalAccessPolicy** - Create CA policies for filtering profiles
+- **IA_TLSPOCV2** - Advanced TLS certificate workflow for inspection
+- **IA_internetAccessPoc** - Automated end-to-end Web Content Filtering POC setup
 
 ### Authentication & Security
 
@@ -172,28 +213,49 @@ pytest --cov=getset_pox_mcp tests/
 ### Project Structure
 
 ```
-getset-pox-mcp/
-├── getset_pox_mcp/          # Main package
+GetSetPOx/
+├── getset_pox_mcp/              # Main package
 │   ├── __init__.py
-│   ├── server.py            # Main server entry point
-│   ├── config.py            # Configuration management
-│   ├── logging_config.py    # Logging setup
-│   ├── transport/           # Transport layer implementations
+│   ├── server.py                # Main server entry point
+│   ├── config.py                # Configuration management
+│   ├── logging_config.py        # Logging setup
+│   ├── authentication/          # Authentication module
 │   │   ├── __init__.py
-│   │   ├── stdio.py         # STDIO transport
-│   │   └── http.py          # HTTP transport
-│   └── services/            # MCP services and tools
-│       ├── __init__.py
-│       ├── hello_world.py   # HelloWorld service
-│       └── echo.py          # Echo service
-├── tests/                   # Test suite
-│   ├── __init__.py
-│   ├── test_hello_world.py
-│   └── test_echo.py
-├── pyproject.toml           # Project configuration
-├── requirements.txt         # Production dependencies
-├── requirements-dev.txt     # Development dependencies
-└── README.md               # This file
+│   │   ├── auth_config.py       # Auth configuration
+│   │   ├── auth_provider.py     # OAuth2 provider
+│   │   ├── middleware.py        # Auth middleware
+│   │   └── token_manager.py     # Token management
+│   ├── transport/               # Transport layer implementations
+│   │   └── __init__.py
+│   └── services/                # MCP services and tools
+│       ├── diagnostics/         # Diagnostics service
+│       ├── eid/                 # Entra ID management
+│       ├── iga/                 # Identity Governance
+│       ├── intune/              # Intune device management
+│       ├── internetAccess/      # Global Secure Access
+│       ├── poc/                 # POC utilities
+│       └── Test/                # Test services (hello_world, echo)
+├── docs/                        # Documentation
+│   └── authentication.md        # Auth setup guide
+├── scripts/                     # Setup scripts
+│   ├── setup.bat                # Windows setup
+│   └── setup.sh                 # Unix setup
+├── tests/                       # Test suite
+│   ├── test_authentication.py
+│   ├── test_diagnostics.py
+│   ├── test_echo.py
+│   └── test_hello_world.py
+├── .gitignore                   # Git ignore rules
+├── CHANGELOG.md                 # Version history
+├── CODE_OF_CONDUCT.md           # Code of conduct
+├── CONTRIBUTING.md              # Contribution guidelines
+├── LICENSE                      # MIT License
+├── pyproject.toml               # Project configuration
+├── README.md                    # This file
+├── requirements.txt             # Production dependencies
+├── requirements-dev.txt         # Development dependencies
+├── SECURITY.md                  # Security policy
+└── setup.py                     # Setup script
 ```
 
 ### Adding New Services
