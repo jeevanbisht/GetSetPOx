@@ -18,12 +18,12 @@ with open("requirements.txt", "r", encoding="utf-8") as fh:
 setup(
     name="getset-pox-mcp",
     version="0.1.0",
-    author="Your Name",
-    author_email="your.email@example.com",
-    description="A Model Context Protocol (MCP) server with example services",
+    author="Jeevan Bisht",
+    author_email="jeevanb@hotmail.com",
+    description="MCP server for Microsoft Entra ID, Global Secure Access, IGA, Intune & Purview POCs",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/yourusername/getset-pox-mcp",
+    url="https://github.com/jeevanbisht/GetSetPOx",
     packages=find_packages(exclude=["tests", "tests.*"]),
     classifiers=[
         "Development Status :: 4 - Beta",

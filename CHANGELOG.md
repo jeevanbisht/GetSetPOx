@@ -64,4 +64,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `hello_world`: Generate personalized greeting messages
 - `echo`: Echo messages with metadata and optional uppercase conversion
 
-[0.1.0]: https://github.com/yourusername/getset-pox-mcp/releases/tag/v0.1.0
+[0.1.0]: https://github.com/jeevanbisht/GetSetPOx/releases/tag/v0.1.0

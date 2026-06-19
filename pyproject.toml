@@ -5,12 +5,12 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "getset-pox-mcp"
 version = "0.1.0"
-description = "A Model Context Protocol (MCP) server with example services"
+description = "MCP server for Microsoft Entra ID, Global Secure Access, IGA, Intune & Purview POCs"
 readme = "README.md"
 requires-python = ">=3.10"
 license = {text = "MIT"}
 authors = [
-    {name = "Your Name", email = "your.email@example.com"}
+    {name = "Jeevan Bisht", email = "jeevanb@hotmail.com"}
 ]
 keywords = ["mcp", "model-context-protocol", "ai", "llm"]
 classifiers = [
@@ -42,9 +42,10 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/yourusername/getset-pox-mcp"
-Repository = "https://github.com/yourusername/getset-pox-mcp"
-Documentation = "https://github.com/yourusername/getset-pox-mcp#readme"
+Homepage = "https://github.com/jeevanbisht/GetSetPOx"
+Repository = "https://github.com/jeevanbisht/GetSetPOx"
+Documentation = "https://github.com/jeevanbisht/GetSetPOx#readme"
+Issues = "https://github.com/jeevanbisht/GetSetPOx/issues"
 
 [project.scripts]
 getset-pox-mcp = "getset_pox_mcp.server:main"
